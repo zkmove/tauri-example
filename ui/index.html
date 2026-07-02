@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>zkMove Mint (MVP)</title>
+  <style>
+    :root { color-scheme: light dark; }
+    body { font-family: -apple-system, system-ui, sans-serif; margin: 24px; max-width: 560px; }
+    h1 { font-size: 1.2rem; }
+    fieldset { border: 1px solid #8884; border-radius: 8px; margin-bottom: 16px; padding: 12px; }
+    legend { font-weight: 600; padding: 0 6px; }
+    label { display: block; margin: 8px 0 2px; font-size: 0.85rem; opacity: 0.8; }
+    input { width: 100%; box-sizing: border-box; padding: 6px 8px; font-family: ui-monospace, monospace; }
+    button { margin-top: 12px; padding: 8px 16px; font-size: 0.95rem; cursor: pointer; }
+    button:disabled { opacity: 0.5; cursor: wait; }
+    pre { background: #8881; border-radius: 6px; padding: 10px; font-size: 0.75rem;
+          white-space: pre-wrap; word-break: break-all; min-height: 2em; }
+    .ok { color: #2a2; } .err { color: #c33; }
+    .step { opacity: 0.5; } .step.active { opacity: 1; font-weight: 600; }
+  </style>
+</head>
+<body>
+  <h1>zkMove Confidential Mint <small>(MVP)</small></h1>
+  <p>
+    <span class="step active" id="s1">1 Secret</span> →
+    <span class="step" id="s2">2 Prove (local)</span> →
+    <span class="step" id="s3">3 Submit (chain)</span>
+  </p>
+
+  <fieldset>
+    <legend>Secret input (never leaves this machine)</legend>
+    <label for="value">amount (u128)</label>
+    <input id="value" value="100" />
+    <label for="nonce">nonce (u128)</label>
+    <input id="nonce" value="12345" />
+    <button id="mint">Mint</button>
+  </fieldset>
+
+  <fieldset>
+    <legend>Progress</legend>
+    <pre id="log">ready.</pre>
+  </fieldset>
+
+  <fieldset>
+    <legend>Result</legend>
+    <pre id="result">—</pre>
+  </fieldset>
+
+  <script>
+    const { invoke } = window.__TAURI__.core;
+    const $ = (id) => document.getElementById(id);
+    const log = (msg, cls) => {
+      const line = document.createElement("div");
+      if (cls) line.className = cls;
+      line.textContent = msg;
+      $("log").appendChild(line);
+    };
+    const setStep = (n) => {
+      for (let i = 1; i <= 3; i++) $("s" + i).classList.toggle("active", i <= n);
+    };
+
+    $("mint").addEventListener("click", async () => {
+      const value = $("value").value.trim();
+      const nonce = $("nonce").value.trim();
+      $("mint").disabled = true;
+      $("log").textContent = "";
+      $("result").textContent = "—";
+      try {
+        setStep(2);
+        log("computing encrypted value + generating witness/proof locally...");
+        setStep(3);
+        log("building PTB + submitting mint...");
+        const out = await invoke("mint", { value, nonce });
+        log("encrypted_value = " + out.encryptedValue, "ok");
+        log("proof bytes = " + out.proofBytes + ", instance bytes = " + out.instanceBytes, "ok");
+        log("tx mode = " + out.txMode, "ok");
+        if (out.proofBuilder) log("proof builder = " + out.proofBuilder, "ok");
+        log("tx " + out.txDigest + " -> success", "ok");
+        $("result").textContent = JSON.stringify(out, null, 2);
+      } catch (e) {
+        log(String(e), "err");
+      } finally {
+        $("mint").disabled = false;
+        setStep(1);
+      }
+    });
+  </script>
+</body>
+</html>

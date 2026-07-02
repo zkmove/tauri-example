@@ -1,0 +1,28 @@
+{
+  "chain": "sui-localnet",
+  "appPackage": "0x97d1dbda648ce7defc095eed97696a8df310d3a75aa4e14c84900fc1663183a0",
+  "module": "mint_min",
+  "function": "mint_from_builder",
+  "store": "0x09507ee659814e68c291584cebf557c40378ca5bf6b504274b65c9ab83deed9e",
+  "verifierApiPackage": "0x6e307110e576cdb9cf2f2c37e4739c0f5841ea03e7fc54cbc74dfc3a125a1ca3",
+  "paramsObjectId": "0xa0670906250b6ed42708824eaa3bf6b41bc1fd0076fc692599e1c46fe6d0c742",
+  "vkObjectId": "0x46b0f4f354357dba4211cf09077eeb6e867754307265f097924ad8f564be5374",
+  "gasBudget": "1000000000",
+  "sui": {
+    "rpcUrl": "http://127.0.0.1:9000",
+    "keystorePath": null,
+    "sender": null
+  },
+  "circuit": {
+    "packagePath": "../zkmove/examples/confidential-asset/off-chain",
+    "moduleStorage": "storage/0x000000000000000000000000000000000000000000000000000000000000cafe/modules/encryption.mv",
+    "entryFunction": "encrypt",
+    "circuitName": "encrypt",
+    "pubsIndices": [
+      1
+    ],
+    "kzg": "gwc",
+    "k": 12,
+    "srsPath": "../halo2-verifier.move/example/params/kzg_bn254_12.srs"
+  }
+}

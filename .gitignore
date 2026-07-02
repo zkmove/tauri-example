@@ -1,0 +1,5 @@
+/src-tauri/target/
+/src-tauri/gen/
+/mint-min/build/
+/.zkmove/
+*.log
