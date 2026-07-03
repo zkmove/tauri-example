@@ -11350,11 +11350,8 @@ dependencies = [
  "serde_json",
  "shared-crypto",
  "sui-config",
- "sui-json",
  "sui-keys",
  "sui-sdk",
- "sui-types",
- "sui-verifier-api 1.0.0",
 ]
 
 [[package]]
@@ -11600,6 +11597,7 @@ dependencies = [
  "hex",
  "serde",
  "serde_json",
+ "sui-ptb-helper",
 ]
 
 [[package]]
@@ -14454,6 +14452,7 @@ dependencies = [
  "serde",
  "serde_json",
  "sui-ptb-helper",
+ "sui-verifier-api 1.0.0",
  "tauri",
  "tauri-build",
  "zkmove-cli",
