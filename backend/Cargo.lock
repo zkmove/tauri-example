@@ -1652,6 +1652,7 @@ checksum = "cc14f565cf027a105f7a44ccf9e5b424348421a1d8952a8fc9d499d313107789"
 [[package]]
 name = "consensus-config"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "fastcrypto",
  "mysten-network",
@@ -1663,6 +1664,7 @@ dependencies = [
 [[package]]
 name = "consensus-types"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "base64 0.21.7",
  "consensus-config",
@@ -2782,6 +2784,7 @@ checksum = "c34f04666d835ff5d62e058c3995147c06f42fe86ff053337632bca83e42702d"
 [[package]]
 name = "enum-compat-util"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "serde_yaml",
 ]
@@ -4967,6 +4970,7 @@ dependencies = [
 [[package]]
 name = "jsonrpc"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "serde",
  "serde_json",
@@ -5778,31 +5782,36 @@ dependencies = [
 [[package]]
 name = "move-abstract-interpreter"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 
 [[package]]
 name = "move-abstract-interpreter-v2"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
- "move-binary-format 0.0.3",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
 ]
 
 [[package]]
 name = "move-abstract-interpreter-v3"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 
 [[package]]
 name = "move-abstract-stack"
 version = "0.0.1"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 
 [[package]]
 name = "move-binary-format"
 version = "0.0.3"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "enum-compat-util",
  "indexmap 2.14.0",
  "move-abstract-interpreter",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-proc-macros",
  "ref-cast",
  "serde",
@@ -5828,6 +5837,7 @@ dependencies = [
 [[package]]
 name = "move-borrow-graph"
 version = "0.0.1"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 
 [[package]]
 name = "move-borrow-graph"
@@ -5837,14 +5847,15 @@ source = "git+https://github.com/zkmove/move?rev=f98f7d6#f98f7d6291eb09877308fe4
 [[package]]
 name = "move-bytecode-source-map"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
- "move-binary-format 0.0.3",
- "move-command-line-common 0.1.0",
- "move-core-types 0.0.4",
- "move-ir-types 0.1.0",
- "move-symbol-pool 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-command-line-common 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-ir-types 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-symbol-pool 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "serde",
  "serde_json",
 ]
@@ -5867,11 +5878,12 @@ dependencies = [
 [[package]]
 name = "move-bytecode-utils"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "indexmap 2.14.0",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "petgraph 0.8.3",
  "serde-reflection 0.5.2",
 ]
@@ -5891,13 +5903,14 @@ dependencies = [
 [[package]]
 name = "move-bytecode-verifier"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "move-abstract-interpreter",
  "move-abstract-stack",
- "move-binary-format 0.0.3",
- "move-borrow-graph 0.0.1",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-borrow-graph 0.0.1 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-regex-borrow-graph",
  "move-vm-config",
  "petgraph 0.8.3",
@@ -5921,22 +5934,24 @@ dependencies = [
 [[package]]
 name = "move-bytecode-verifier-meter"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
 ]
 
 [[package]]
 name = "move-bytecode-verifier-v0"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "move-abstract-interpreter-v2",
  "move-abstract-stack",
- "move-binary-format 0.0.3",
- "move-borrow-graph 0.0.1",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-borrow-graph 0.0.1 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "petgraph 0.8.3",
 ]
@@ -5944,13 +5959,14 @@ dependencies = [
 [[package]]
 name = "move-bytecode-verifier-v1"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "move-abstract-interpreter-v2",
  "move-abstract-stack",
- "move-binary-format 0.0.3",
- "move-borrow-graph 0.0.1",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-borrow-graph 0.0.1 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "petgraph 0.8.3",
 ]
@@ -5958,13 +5974,14 @@ dependencies = [
 [[package]]
 name = "move-bytecode-verifier-v2"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "move-abstract-interpreter-v2",
  "move-abstract-stack",
- "move-binary-format 0.0.3",
- "move-borrow-graph 0.0.1",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-borrow-graph 0.0.1 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "petgraph 0.8.3",
 ]
@@ -5972,13 +5989,14 @@ dependencies = [
 [[package]]
 name = "move-bytecode-verifier-v3"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "move-abstract-interpreter",
  "move-abstract-stack",
- "move-binary-format 0.0.3",
- "move-borrow-graph 0.0.1",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-borrow-graph 0.0.1 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-regex-borrow-graph",
  "move-vm-config",
  "petgraph 0.8.3",
@@ -6046,15 +6064,16 @@ dependencies = [
 [[package]]
 name = "move-command-line-common"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
  "dirs-next",
  "hex",
  "insta",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
- "move-symbol-pool 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-symbol-pool 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "packed_struct",
  "serde",
  "sha2 0.9.9",
@@ -6082,6 +6101,7 @@ dependencies = [
 [[package]]
 name = "move-compiler"
 version = "0.0.1"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
@@ -6092,16 +6112,16 @@ dependencies = [
  "insta",
  "lsp-types 0.95.1",
  "move-abstract-interpreter",
- "move-binary-format 0.0.3",
- "move-borrow-graph 0.0.1",
- "move-bytecode-source-map 0.1.0",
- "move-bytecode-verifier 0.1.0",
- "move-command-line-common 0.1.0",
- "move-core-types 0.0.4",
- "move-ir-to-bytecode 0.1.0",
- "move-ir-types 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-borrow-graph 0.0.1 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-source-map 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-verifier 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-command-line-common 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-ir-to-bytecode 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-ir-types 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-proc-macros",
- "move-symbol-pool 0.1.0",
+ "move-symbol-pool 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "petgraph 0.8.3",
  "rayon",
  "regex",
@@ -6172,6 +6192,7 @@ dependencies = [
 [[package]]
 name = "move-core-types"
 version = "0.0.4"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
@@ -6215,6 +6236,7 @@ dependencies = [
 [[package]]
 name = "move-coverage"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
@@ -6224,13 +6246,13 @@ dependencies = [
  "indexmap 2.14.0",
  "lcov",
  "move-abstract-interpreter",
- "move-binary-format 0.0.3",
- "move-bytecode-source-map 0.1.0",
- "move-bytecode-verifier 0.1.0",
- "move-command-line-common 0.1.0",
- "move-compiler 0.0.1",
- "move-core-types 0.0.4",
- "move-ir-types 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-source-map 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-verifier 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-command-line-common 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-compiler 0.0.1 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-ir-types 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-trace-format",
  "petgraph 0.8.3",
  "rayon",
@@ -6259,20 +6281,21 @@ dependencies = [
 [[package]]
 name = "move-disassembler"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "clap",
  "hex",
  "inline_colorization",
  "move-abstract-interpreter",
- "move-binary-format 0.0.3",
- "move-bytecode-source-map 0.1.0",
- "move-command-line-common 0.1.0",
- "move-compiler 0.0.1",
- "move-core-types 0.0.4",
- "move-coverage 0.1.0",
- "move-ir-types 0.1.0",
- "move-symbol-pool 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-source-map 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-command-line-common 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-compiler 0.0.1 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-coverage 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-ir-types 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-symbol-pool 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
 ]
 
 [[package]]
@@ -6325,17 +6348,18 @@ dependencies = [
 [[package]]
 name = "move-ir-to-bytecode"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "codespan-reporting",
  "log",
- "move-binary-format 0.0.3",
- "move-bytecode-source-map 0.1.0",
- "move-command-line-common 0.1.0",
- "move-core-types 0.0.4",
- "move-ir-to-bytecode-syntax 0.1.0",
- "move-ir-types 0.1.0",
- "move-symbol-pool 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-source-map 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-command-line-common 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-ir-to-bytecode-syntax 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-ir-types 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-symbol-pool 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "ouroboros 0.17.2",
 ]
 
@@ -6360,13 +6384,14 @@ dependencies = [
 [[package]]
 name = "move-ir-to-bytecode-syntax"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "hex",
- "move-command-line-common 0.1.0",
- "move-core-types 0.0.4",
- "move-ir-types 0.1.0",
- "move-symbol-pool 0.1.0",
+ "move-command-line-common 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-ir-types 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-symbol-pool 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
 ]
 
 [[package]]
@@ -6385,11 +6410,12 @@ dependencies = [
 [[package]]
 name = "move-ir-types"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "hex",
- "move-command-line-common 0.1.0",
- "move-core-types 0.0.4",
- "move-symbol-pool 0.1.0",
+ "move-command-line-common 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-symbol-pool 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "serde",
 ]
 
@@ -6469,6 +6495,7 @@ dependencies = [
 [[package]]
 name = "move-proc-macros"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "enum-compat-util",
  "quote",
@@ -6551,11 +6578,12 @@ dependencies = [
 [[package]]
 name = "move-regex-borrow-graph"
 version = "0.0.1"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "indexmap 2.14.0",
- "move-binary-format 0.0.3",
- "move-command-line-common 0.1.0",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-command-line-common 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "proptest",
 ]
 
@@ -6619,10 +6647,11 @@ dependencies = [
 [[package]]
 name = "move-stdlib-natives-v0"
 version = "0.1.1"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "hex",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-runtime-v0",
  "move-vm-types-v0",
  "sha2 0.9.9",
@@ -6633,10 +6662,11 @@ dependencies = [
 [[package]]
 name = "move-stdlib-natives-v1"
 version = "0.1.1"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "hex",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-runtime-v1",
  "move-vm-types-v1",
  "sha2 0.9.9",
@@ -6647,10 +6677,11 @@ dependencies = [
 [[package]]
 name = "move-stdlib-natives-v2"
 version = "0.1.1"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "hex",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-runtime-v2",
  "move-vm-types-v2",
  "sha2 0.9.9",
@@ -6661,10 +6692,11 @@ dependencies = [
 [[package]]
 name = "move-stdlib-natives-v3"
 version = "0.1.1"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "hex",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-runtime-v3",
  "move-vm-types-v3",
  "sha2 0.9.9",
@@ -6675,6 +6707,7 @@ dependencies = [
 [[package]]
 name = "move-symbol-pool"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "phf 0.11.3",
  "serde",
@@ -6707,9 +6740,10 @@ dependencies = [
 [[package]]
 name = "move-trace-format"
 version = "0.0.1"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "serde",
  "serde_json",
  "zstd",
@@ -6746,13 +6780,15 @@ dependencies = [
 [[package]]
 name = "move-vm-config"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
- "move-binary-format 0.0.3",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
 ]
 
 [[package]]
 name = "move-vm-profiler"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "move-trace-format",
  "move-vm-config",
@@ -6764,6 +6800,7 @@ dependencies = [
 [[package]]
 name = "move-vm-runtime"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
@@ -6776,9 +6813,9 @@ dependencies = [
  "lasso",
  "lru 0.13.0",
  "move-abstract-interpreter",
- "move-binary-format 0.0.3",
- "move-bytecode-verifier 0.1.0",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-verifier 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-trace-format",
  "move-vm-config",
  "parking_lot 0.11.1",
@@ -6819,12 +6856,13 @@ dependencies = [
 [[package]]
 name = "move-vm-runtime-v0"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "better_any",
  "fail 0.4.0",
- "move-binary-format 0.0.3",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-v0",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "move-vm-types-v0",
  "once_cell",
@@ -6836,12 +6874,13 @@ dependencies = [
 [[package]]
 name = "move-vm-runtime-v1"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "better_any",
  "fail 0.4.0",
- "move-binary-format 0.0.3",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-v1",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "move-vm-types-v1",
  "once_cell",
@@ -6853,12 +6892,13 @@ dependencies = [
 [[package]]
 name = "move-vm-runtime-v2"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "better_any",
  "fail 0.4.0",
- "move-binary-format 0.0.3",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-v2",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "move-vm-types-v2",
  "once_cell",
@@ -6870,12 +6910,13 @@ dependencies = [
 [[package]]
 name = "move-vm-runtime-v3"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "better_any",
  "fail 0.4.0",
- "move-binary-format 0.0.3",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-v3",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-trace-format",
  "move-vm-config",
  "move-vm-types-v3",
@@ -6918,10 +6959,11 @@ dependencies = [
 [[package]]
 name = "move-vm-types-v0"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bcs 0.1.6",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "serde",
  "smallvec",
 ]
@@ -6929,10 +6971,11 @@ dependencies = [
 [[package]]
 name = "move-vm-types-v1"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bcs 0.1.6",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "serde",
  "smallvec",
 ]
@@ -6940,10 +6983,11 @@ dependencies = [
 [[package]]
 name = "move-vm-types-v2"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bcs 0.1.6",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "serde",
  "smallvec",
 ]
@@ -6951,10 +6995,11 @@ dependencies = [
 [[package]]
 name = "move-vm-types-v3"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bcs 0.1.6",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "serde",
  "smallvec",
 ]
@@ -7051,6 +7096,7 @@ checksum = "1d87ecb2933e8aeadb3e3a02b828fed80a7528047e68b4f424523a0981a3a084"
 [[package]]
 name = "mysten-common"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "antithesis_sdk",
  "either",
@@ -7069,6 +7115,7 @@ dependencies = [
 [[package]]
 name = "mysten-metrics"
 version = "0.7.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "async-trait",
  "axum",
@@ -7089,6 +7136,7 @@ dependencies = [
 [[package]]
 name = "mysten-network"
 version = "0.2.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anemo",
  "anemo-tower",
@@ -8658,6 +8706,7 @@ dependencies = [
 [[package]]
 name = "prometheus-closure-metric"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "prometheus",
@@ -10249,6 +10298,7 @@ dependencies = [
 [[package]]
 name = "shared-crypto"
 version = "0.0.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bcs 0.1.6",
  "eyre",
@@ -10751,22 +10801,23 @@ checksum = "734676eb262c623cec13c3155096e08d1f8f29adce39ba17948b18dad1e54142"
 [[package]]
 name = "sui-adapter-latest"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
  "either",
  "indexmap 2.14.0",
  "leb128",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
- "move-bytecode-verifier 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-verifier 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-regex-borrow-graph",
  "move-trace-format",
  "move-vm-config",
  "move-vm-profiler",
- "move-vm-runtime 0.1.0",
+ "move-vm-runtime 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "mysten-common",
  "mysten-metrics",
  "nonempty",
@@ -10785,15 +10836,16 @@ dependencies = [
 [[package]]
 name = "sui-adapter-v0"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
  "leb128",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
  "move-bytecode-verifier-v0",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "move-vm-profiler",
  "move-vm-runtime-v0",
@@ -10812,15 +10864,16 @@ dependencies = [
 [[package]]
 name = "sui-adapter-v1"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
  "leb128",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
  "move-bytecode-verifier-v1",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "move-vm-profiler",
  "move-vm-runtime-v1",
@@ -10838,15 +10891,16 @@ dependencies = [
 [[package]]
 name = "sui-adapter-v2"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
  "leb128",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
  "move-bytecode-verifier-v2",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "move-vm-profiler",
  "move-vm-runtime-v2",
@@ -10864,17 +10918,18 @@ dependencies = [
 [[package]]
 name = "sui-adapter-v3"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
  "either",
  "indexmap 2.14.0",
  "leb128",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
  "move-bytecode-verifier-v3",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-regex-borrow-graph",
  "move-trace-format",
  "move-vm-config",
@@ -10898,6 +10953,7 @@ dependencies = [
 [[package]]
 name = "sui-config"
 version = "0.0.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anemo",
  "anyhow",
@@ -10954,6 +11010,7 @@ dependencies = [
 [[package]]
 name = "sui-display"
 version = "1.72.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -10964,7 +11021,7 @@ dependencies = [
  "futures",
  "indexmap 2.14.0",
  "itertools 0.13.0",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "mysten-common",
  "serde",
  "serde_json",
@@ -10976,6 +11033,7 @@ dependencies = [
 [[package]]
 name = "sui-enum-compat-util"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "serde_yaml",
 ]
@@ -10983,12 +11041,13 @@ dependencies = [
 [[package]]
 name = "sui-execution"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "move-abstract-interpreter",
  "move-abstract-interpreter-v2",
  "move-abstract-interpreter-v3",
- "move-binary-format 0.0.3",
- "move-bytecode-verifier 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-verifier 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
  "move-bytecode-verifier-v0",
  "move-bytecode-verifier-v1",
@@ -10996,7 +11055,7 @@ dependencies = [
  "move-bytecode-verifier-v3",
  "move-trace-format",
  "move-vm-config",
- "move-vm-runtime 0.1.0",
+ "move-vm-runtime 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-runtime-v0",
  "move-vm-runtime-v1",
  "move-vm-runtime-v2",
@@ -11027,6 +11086,7 @@ dependencies = [
 [[package]]
 name = "sui-http"
 version = "0.0.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bytes",
  "http 1.4.2",
@@ -11046,13 +11106,14 @@ dependencies = [
 [[package]]
 name = "sui-json"
 version = "0.0.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
  "fastcrypto",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "schemars 0.8.22",
  "serde",
  "serde_json",
@@ -11062,6 +11123,7 @@ dependencies = [
 [[package]]
 name = "sui-json-rpc-api"
 version = "0.0.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "fastcrypto",
@@ -11081,6 +11143,7 @@ dependencies = [
 [[package]]
 name = "sui-json-rpc-types"
 version = "0.0.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
@@ -11089,12 +11152,12 @@ dependencies = [
  "fastcrypto",
  "itertools 0.13.0",
  "json_to_table",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
- "move-command-line-common 0.1.0",
- "move-core-types 0.0.4",
- "move-disassembler 0.1.0",
- "move-ir-types 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-command-line-common 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-disassembler 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-ir-types 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "mysten-common",
  "mysten-metrics",
  "nonempty",
@@ -11115,6 +11178,7 @@ dependencies = [
 [[package]]
 name = "sui-keys"
 version = "0.0.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -11141,6 +11205,7 @@ dependencies = [
 [[package]]
 name = "sui-macros"
 version = "0.7.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "futures",
  "once_cell",
@@ -11151,6 +11216,7 @@ dependencies = [
 [[package]]
 name = "sui-move-natives-latest"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bcs 0.1.6",
  "better_any",
@@ -11159,9 +11225,9 @@ dependencies = [
  "fastcrypto-zkp",
  "halo2-verifier 1.0.0 (git+https://github.com/zkmove/halo2-verifier.move?rev=b0a4234701ceb9029e7cdb43066b918da15f095b)",
  "indexmap 2.14.0",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
- "move-vm-runtime 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-vm-runtime 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "rand 0.8.6",
  "smallvec",
  "sui-protocol-config",
@@ -11172,14 +11238,15 @@ dependencies = [
 [[package]]
 name = "sui-move-natives-v0"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bcs 0.1.6",
  "better_any",
  "fastcrypto",
  "fastcrypto-zkp",
  "linked-hash-map",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-stdlib-natives-v0",
  "move-vm-runtime-v0",
  "move-vm-types-v0",
@@ -11192,14 +11259,15 @@ dependencies = [
 [[package]]
 name = "sui-move-natives-v1"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bcs 0.1.6",
  "better_any",
  "fastcrypto",
  "fastcrypto-zkp",
  "linked-hash-map",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-stdlib-natives-v1",
  "move-vm-runtime-v1",
  "move-vm-types-v1",
@@ -11212,14 +11280,15 @@ dependencies = [
 [[package]]
 name = "sui-move-natives-v2"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bcs 0.1.6",
  "better_any",
  "fastcrypto",
  "fastcrypto-zkp",
  "indexmap 2.14.0",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-stdlib-natives-v2",
  "move-vm-runtime-v2",
  "move-vm-types-v2",
@@ -11232,6 +11301,7 @@ dependencies = [
 [[package]]
 name = "sui-move-natives-v3"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bcs 0.1.6",
  "better_any",
@@ -11239,8 +11309,8 @@ dependencies = [
  "fastcrypto-vdf",
  "fastcrypto-zkp",
  "indexmap 2.14.0",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-stdlib-natives-v3",
  "move-vm-runtime-v3",
  "move-vm-types-v3",
@@ -11254,9 +11324,10 @@ dependencies = [
 [[package]]
 name = "sui-name-service"
 version = "1.72.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bcs 0.1.6",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "serde",
  "sui-types",
  "thiserror 1.0.69",
@@ -11265,6 +11336,7 @@ dependencies = [
 [[package]]
 name = "sui-open-rpc"
 version = "1.72.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "bcs 0.1.6",
  "schemars 0.8.22",
@@ -11276,6 +11348,7 @@ dependencies = [
 [[package]]
 name = "sui-open-rpc-macros"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "derive-syn-parse",
  "itertools 0.13.0",
@@ -11288,14 +11361,15 @@ dependencies = [
 [[package]]
 name = "sui-package-resolver"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "async-trait",
  "bcs 0.1.6",
  "itertools 0.13.0",
  "lru 0.10.1",
- "move-binary-format 0.0.3",
- "move-command-line-common 0.1.0",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-command-line-common 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "sui-types",
  "thiserror 1.0.69",
  "tokio",
@@ -11304,6 +11378,7 @@ dependencies = [
 [[package]]
 name = "sui-proc-macros"
 version = "0.7.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "msim-macros",
  "proc-macro2",
@@ -11315,11 +11390,12 @@ dependencies = [
 [[package]]
 name = "sui-protocol-config"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "clap",
  "fastcrypto",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "mysten-common",
  "rand 0.8.6",
@@ -11335,6 +11411,7 @@ dependencies = [
 [[package]]
 name = "sui-protocol-config-macros"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -11380,6 +11457,7 @@ dependencies = [
 [[package]]
 name = "sui-rpc-api"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "async-stream",
@@ -11391,8 +11469,8 @@ dependencies = [
  "futures",
  "http 1.4.2",
  "itertools 0.13.0",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "mysten-common",
  "mysten-network",
  "prometheus",
@@ -11430,6 +11508,7 @@ dependencies = [
 [[package]]
 name = "sui-sdk"
 version = "1.72.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "async-trait",
@@ -11439,7 +11518,7 @@ dependencies = [
  "futures",
  "futures-core",
  "jsonrpsee",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "mysten-common",
  "reqwest 0.12.28",
  "serde",
@@ -11486,13 +11565,14 @@ dependencies = [
 [[package]]
 name = "sui-transaction-builder"
 version = "0.0.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anyhow",
  "async-trait",
  "bcs 0.1.6",
  "futures",
- "move-binary-format 0.0.3",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "sui-json",
  "sui-json-rpc-types",
  "sui-types",
@@ -11501,6 +11581,7 @@ dependencies = [
 [[package]]
 name = "sui-transaction-checks"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "fastcrypto-zkp",
  "sui-config",
@@ -11514,6 +11595,7 @@ dependencies = [
 [[package]]
 name = "sui-types"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "anemo",
  "anyhow",
@@ -11538,9 +11620,9 @@ dependencies = [
  "indexmap 2.14.0",
  "itertools 0.13.0",
  "lru 0.10.1",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
- "move-core-types 0.0.4",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-trace-format",
  "move-vm-profiler",
  "mysten-common",
@@ -11617,13 +11699,14 @@ dependencies = [
 [[package]]
 name = "sui-verifier-latest"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "move-abstract-stack",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
- "move-bytecode-verifier 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-verifier 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "mysten-common",
  "sui-protocol-config",
@@ -11633,13 +11716,14 @@ dependencies = [
 [[package]]
 name = "sui-verifier-v0"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "move-abstract-stack",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
  "move-bytecode-verifier-v0",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "sui-protocol-config",
  "sui-types",
@@ -11648,13 +11732,14 @@ dependencies = [
 [[package]]
 name = "sui-verifier-v1"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "move-abstract-stack",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
  "move-bytecode-verifier-v1",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "sui-types",
 ]
@@ -11662,13 +11747,14 @@ dependencies = [
 [[package]]
 name = "sui-verifier-v2"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "move-abstract-stack",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
  "move-bytecode-verifier-v2",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "sui-protocol-config",
  "sui-types",
@@ -11677,13 +11763,14 @@ dependencies = [
 [[package]]
 name = "sui-verifier-v3"
 version = "0.1.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "move-abstract-stack",
- "move-binary-format 0.0.3",
- "move-bytecode-utils 0.1.0",
+ "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
+ "move-bytecode-utils 0.1.0 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-bytecode-verifier-meter",
  "move-bytecode-verifier-v3",
- "move-core-types 0.0.4",
+ "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-vm-config",
  "sui-protocol-config",
  "sui-types",
@@ -12908,6 +12995,7 @@ checksum = "6af6ae20167a9ece4bcb41af5b80f8a1f1df981f6391189ce00fd257af04126a"
 [[package]]
 name = "typed-store-error"
 version = "0.4.0"
+source = "git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105#76269b3f6ff1ea56ddfcf258be8c19ffe21ce105"
 dependencies = [
  "serde",
  "thiserror 1.0.69",

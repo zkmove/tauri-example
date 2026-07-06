@@ -1,8 +1,7 @@
-/src-tauri/target/
-/src-tauri/gen/
+/backend/target/
+/backend/gen/
 /mint-min/build/
 /.zkmove/
 *.log
 /MVP-IMPLEMENTATION-REVIEW.md
-/MVP-RUNBOOK.md
 /mint-min/run-localnet-e2e.sh
