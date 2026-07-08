@@ -9,11 +9,19 @@ tauri-build = { version = "2", features = [] }
 [dependencies]
 anyhow = "1"
 move-core-types = { git = "https://github.com/zkmove/move", rev = "f98f7d6" }
+halo2-verifier = { path = "../../halo2-verifier.move/crates/halo2-verifier" }
 tauri = { version = "2", features = [] }
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 sui-ptb-helper = { path = "../../halo2-verifier.move/crates/sui-ptb-helper" }
 sui-verifier-api = { path = "../../halo2-verifier.move/crates/sui-verifier-api" }
 zkmove-cli = { path = "../../zkmove-vm/cli" }
+
+[patch."https://github.com/zkmove/halo2-verifier.move"]
+aptos-verifier-api = { path = "../../halo2-verifier.move/crates/aptos-verifier-api" }
+halo2 = { path = "../../halo2-verifier.move/crates/halo2" }
+halo2-verifier = { path = "../../halo2-verifier.move/crates/halo2-verifier" }
+sui-verifier-api = { path = "../../halo2-verifier.move/crates/sui-verifier-api" }
+vk-gen-examples = { path = "../../halo2-verifier.move/crates/vk-gen-examples" }
 
 [workspace]

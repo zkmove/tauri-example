@@ -5,34 +5,63 @@
   <title>zkMove Mint (MVP)</title>
   <style>
     :root { color-scheme: light dark; }
-    body { font-family: -apple-system, system-ui, sans-serif; margin: 24px; max-width: 560px; }
-    h1 { font-size: 1.2rem; }
+    body {
+      font-family: -apple-system, system-ui, sans-serif;
+      margin: 24px;
+      max-width: 720px;
+      line-height: 1.35;
+    }
+    h1 { font-size: 1.2rem; margin-bottom: 10px; }
     fieldset { border: 1px solid #8884; border-radius: 8px; margin-bottom: 16px; padding: 12px; }
     legend { font-weight: 600; padding: 0 6px; }
     label { display: block; margin: 8px 0 2px; font-size: 0.85rem; opacity: 0.8; }
     input { width: 100%; box-sizing: border-box; padding: 6px 8px; font-family: ui-monospace, monospace; }
     button { margin-top: 12px; padding: 8px 16px; font-size: 0.95rem; cursor: pointer; }
-    button:disabled { opacity: 0.5; cursor: wait; }
-    pre { background: #8881; border-radius: 6px; padding: 10px; font-size: 0.75rem;
-          white-space: pre-wrap; word-break: break-all; min-height: 2em; }
-    .ok { color: #2a2; } .err { color: #c33; }
-    .step { opacity: 0.5; } .step.active { opacity: 1; font-weight: 600; }
+    button:disabled { opacity: 0.5; cursor: not-allowed; }
+    pre {
+      background: #8881;
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 0.75rem;
+      white-space: pre-wrap;
+      word-break: break-word;
+      min-height: 2em;
+    }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    .ok { color: #2a7d3b; }
+    .err { color: #c33; }
+    .muted { opacity: 0.65; }
+    .step { opacity: 0.5; }
+    .step.active { opacity: 1; font-weight: 600; }
   </style>
 </head>
 <body>
   <h1>zkMove Confidential Mint <small>(MVP)</small></h1>
   <p>
-    <span class="step active" id="s1">1 Secret</span> →
-    <span class="step" id="s2">2 Prove (local)</span> →
-    <span class="step" id="s3">3 Submit (chain)</span>
+    <span class="step active" id="s1">1 Setup</span> →
+    <span class="step" id="s2">2 Prove</span> →
+    <span class="step" id="s3">3 Submit</span>
   </p>
 
   <fieldset>
-    <legend>Secret input (never leaves this machine)</legend>
+    <legend>Setup verifier artifacts</legend>
+    <label for="verifierApiPackage">verifierApiPackage</label>
+    <input id="verifierApiPackage" placeholder="0x..." />
+    <label for="manifestPath">manifestPath</label>
+    <input id="manifestPath" placeholder="ZKMOVE_MINT_MANIFEST or default" />
+    <div class="actions">
+      <button id="setup">Setup Verifier Artifacts</button>
+      <button id="refresh">Refresh Manifest</button>
+    </div>
+    <pre id="manifest">loading manifest...</pre>
+  </fieldset>
+
+  <fieldset>
+    <legend>Secret input</legend>
     <label for="value">amount (u128)</label>
-    <input id="value" value="100" />
+    <input id="value" value="6" />
     <label for="nonce">nonce (u128)</label>
-    <input id="nonce" value="12345" />
+    <input id="nonce" value="0" />
     <button id="mint">Mint</button>
   </fieldset>
 
@@ -43,47 +72,125 @@
 
   <fieldset>
     <legend>Result</legend>
-    <pre id="result">—</pre>
+    <pre id="result">-</pre>
   </fieldset>
 
   <script>
     const { invoke } = window.__TAURI__.core;
     const $ = (id) => document.getElementById(id);
+    let manifestReady = false;
+    let setupBusy = false;
+    let mintBusy = false;
+
+    const manifestPathValue = () => $("manifestPath").value.trim() || null;
+
+    const setStep = (n) => {
+      for (let i = 1; i <= 3; i++) $("s" + i).classList.toggle("active", i <= n);
+    };
+
+    const setButtons = () => {
+      $("setup").disabled = setupBusy || mintBusy;
+      $("refresh").disabled = setupBusy || mintBusy;
+      $("mint").disabled = setupBusy || mintBusy || !manifestReady;
+    };
+
+    const resetLog = () => {
+      $("log").textContent = "";
+      $("result").textContent = "-";
+    };
+
     const log = (msg, cls) => {
       const line = document.createElement("div");
       if (cls) line.className = cls;
       line.textContent = msg;
       $("log").appendChild(line);
     };
-    const setStep = (n) => {
-      for (let i = 1; i <= 3; i++) $("s" + i).classList.toggle("active", i <= n);
+
+    const renderJson = (id, value) => {
+      $(id).textContent = JSON.stringify(value, null, 2);
     };
+
+    const refreshManifest = async () => {
+      try {
+        const status = await invoke("manifest_status", { manifestPath: manifestPathValue() });
+        manifestReady = status.ready;
+        renderJson("manifest", status);
+        $("manifest").className = status.ready ? "ok" : "muted";
+      } catch (e) {
+        manifestReady = false;
+        $("manifest").className = "err";
+        $("manifest").textContent = String(e);
+      } finally {
+        setButtons();
+      }
+    };
+
+    $("refresh").addEventListener("click", refreshManifest);
+
+    $("setup").addEventListener("click", async () => {
+      const value = $("value").value.trim();
+      const nonce = $("nonce").value.trim();
+      const verifierApiPackage = $("verifierApiPackage").value.trim();
+      const manifestPath = manifestPathValue();
+      setupBusy = true;
+      setButtons();
+      resetLog();
+      try {
+        setStep(1);
+        log("generating witness/setup artifacts locally, then uploading verifier artifacts in chunked transactions...");
+        const out = await invoke("setup_verifier_artifacts", {
+          request: {
+            value,
+            nonce,
+            verifierApiPackage,
+            manifestPath
+          }
+        });
+        log("encrypted_value = " + out.encryptedValue, "ok");
+        log("k = " + out.k, "ok");
+        log("paramsObjectId = " + out.paramsObjectId, "ok");
+        log("vkObjectId = " + out.vkObjectId, "ok");
+        log("tx " + out.txDigest + " -> setup success", "ok");
+        $("manifestPath").value = out.manifestPath;
+        renderJson("result", out);
+        await refreshManifest();
+      } catch (e) {
+        log(String(e), "err");
+      } finally {
+        setupBusy = false;
+        setButtons();
+        setStep(1);
+      }
+    });
 
     $("mint").addEventListener("click", async () => {
       const value = $("value").value.trim();
       const nonce = $("nonce").value.trim();
-      $("mint").disabled = true;
-      $("log").textContent = "";
-      $("result").textContent = "—";
+      mintBusy = true;
+      setButtons();
+      resetLog();
       try {
         setStep(2);
         log("computing encrypted value + generating witness/proof locally...");
         setStep(3);
         log("building PTB + submitting mint...");
-        const out = await invoke("mint", { value, nonce });
+        const out = await invoke("mint", { value, nonce, manifestPath: manifestPathValue() });
         log("encrypted_value = " + out.encryptedValue, "ok");
         log("proof bytes = " + out.proofBytes + ", instance bytes = " + out.instanceBytes, "ok");
         log("tx mode = " + out.txMode, "ok");
         if (out.proofBuilder) log("proof builder = " + out.proofBuilder, "ok");
         log("tx " + out.txDigest + " -> success", "ok");
-        $("result").textContent = JSON.stringify(out, null, 2);
+        renderJson("result", out);
       } catch (e) {
         log(String(e), "err");
       } finally {
-        $("mint").disabled = false;
+        mintBusy = false;
+        setButtons();
         setStep(1);
       }
     });
+
+    refreshManifest();
   </script>
 </body>
 </html>

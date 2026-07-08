@@ -3,7 +3,7 @@ use move_core_types::u256::U256;
 use std::env;
 use std::path::PathBuf;
 use std::str::FromStr;
-use zkmove_mint_gui::mint_backend;
+use zkmove_mint_gui::mint;
 
 #[derive(Debug)]
 struct Args {
@@ -23,14 +23,14 @@ fn main() {
 fn run() -> Result<()> {
     let args = parse_args()?;
     let manifest = match args.manifest {
-        Some(path) => mint_backend::load_manifest_from_path(path)?,
-        None => mint_backend::load_manifest()?,
+        Some(path) => mint::load_manifest_from_path(path)?,
+        None => mint::load_manifest()?,
     };
 
-    let proof = mint_backend::prove_mint_sync(&manifest, &args.value, &args.nonce)?;
-    let client = tauri::async_runtime::block_on(mint_backend::client_from_manifest(&manifest))?;
+    let proof = mint::prove_mint_sync(&manifest, &args.value, &args.nonce)?;
+    let client = tauri::async_runtime::block_on(mint::client_from_manifest(&manifest))?;
 
-    let positive = tauri::async_runtime::block_on(mint_backend::execute_mint_transaction(
+    let positive = tauri::async_runtime::block_on(mint::execute_mint_transaction(
         &client,
         &manifest,
         &proof,
@@ -41,8 +41,7 @@ fn run() -> Result<()> {
         "positive mint used unexpected tx mode: {}",
         positive.tx_mode
     );
-    let balance =
-        tauri::async_runtime::block_on(mint_backend::read_store_balance(&client, &manifest))?;
+    let balance = tauri::async_runtime::block_on(mint::read_store_balance(&client, &manifest))?;
     ensure!(
         balance == proof.encrypted_value,
         "balance after positive mint is {balance}, expected {}",
@@ -55,7 +54,7 @@ fn run() -> Result<()> {
 
     if args.negative {
         let tampered_encrypted = increment_u256_string(&proof.encrypted_value)?;
-        match tauri::async_runtime::block_on(mint_backend::execute_mint_transaction(
+        match tauri::async_runtime::block_on(mint::execute_mint_transaction(
             &client,
             &manifest,
             &proof,
@@ -76,12 +75,15 @@ fn run() -> Result<()> {
                         || err_text.contains("abort_code: 1"),
                     "negative mint failed with unexpected error: {err_text}"
                 );
-                println!("negative txMode=single_ptb status=aborted error={err_text}");
+                println!(
+                    "negative txMode=single_ptb status=aborted reason={}",
+                    summarize_expected_abort(&err_text)
+                );
             }
         }
 
         let balance_after_negative =
-            tauri::async_runtime::block_on(mint_backend::read_store_balance(&client, &manifest))?;
+            tauri::async_runtime::block_on(mint::read_store_balance(&client, &manifest))?;
         ensure!(
             balance_after_negative == balance,
             "balance changed after negative mint: before {balance}, after {balance_after_negative}"
@@ -93,6 +95,17 @@ fn run() -> Result<()> {
     }
 
     Ok(())
+}
+
+fn summarize_expected_abort(err_text: &str) -> &'static str {
+    if err_text.contains("EInvalidProof")
+        || err_text.contains("abort_code: 1")
+        || err_text.contains("MoveAbort") && err_text.contains("mint_min")
+    {
+        "mint_min::EInvalidProof"
+    } else {
+        "expected negative-case abort"
+    }
 }
 
 fn parse_args() -> Result<Args> {

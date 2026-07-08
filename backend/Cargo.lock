@@ -329,12 +329,11 @@ checksum = "2a4385e2e34eb35d6b3efe798b9eb88096925d87726c0798709bf56d9ed84af3"
 [[package]]
 name = "aptos-verifier-api"
 version = "1.0.0"
-source = "git+https://github.com/zkmove/halo2-verifier.move?branch=main#b30e002e39c16ae2ffb438b98a9b95b48f3ef8cd"
 dependencies = [
  "anyhow",
  "bcs 0.1.6",
  "group 0.13.0",
- "halo2-verifier 1.0.0 (git+https://github.com/zkmove/halo2-verifier.move?branch=main)",
+ "halo2-verifier",
  "halo2_backend",
  "halo2_proofs",
  "hex",
@@ -3906,28 +3905,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "halo2"
-version = "1.0.0"
-source = "git+https://github.com/zkmove/halo2-verifier.move?branch=main#b30e002e39c16ae2ffb438b98a9b95b48f3ef8cd"
-dependencies = [
- "halo2_backend",
- "halo2_proofs",
- "rand 0.8.6",
- "rand_core 0.6.4",
-]
-
-[[package]]
-name = "halo2"
-version = "1.0.0"
-source = "git+https://github.com/zkmove/halo2-verifier.move?rev=b0a4234701ceb9029e7cdb43066b918da15f095b#b0a4234701ceb9029e7cdb43066b918da15f095b"
-dependencies = [
- "halo2_backend",
- "halo2_proofs",
- "rand 0.8.6",
- "rand_core 0.6.4",
-]
-
-[[package]]
 name = "halo2-verifier"
 version = "1.0.0"
 dependencies = [
@@ -3949,59 +3926,7 @@ dependencies = [
  "hex",
  "hex-literal",
  "rand 0.8.6",
- "vk-gen-examples 1.0.0",
-]
-
-[[package]]
-name = "halo2-verifier"
-version = "1.0.0"
-source = "git+https://github.com/zkmove/halo2-verifier.move?branch=main#b30e002e39c16ae2ffb438b98a9b95b48f3ef8cd"
-dependencies = [
- "anyhow",
- "ark-bn254",
- "ark-ec",
- "ark-ff",
- "ark-serialize",
- "bcs 0.1.6",
- "blake2b_simd",
- "byteorder",
- "group 0.13.0",
- "halo2 1.0.0 (git+https://github.com/zkmove/halo2-verifier.move?branch=main)",
- "halo2_backend",
- "halo2_frontend",
- "halo2_middleware",
- "halo2_proofs",
- "halo2curves",
- "hex",
- "hex-literal",
- "rand 0.8.6",
- "vk-gen-examples 1.0.0 (git+https://github.com/zkmove/halo2-verifier.move?branch=main)",
-]
-
-[[package]]
-name = "halo2-verifier"
-version = "1.0.0"
-source = "git+https://github.com/zkmove/halo2-verifier.move?rev=b0a4234701ceb9029e7cdb43066b918da15f095b#b0a4234701ceb9029e7cdb43066b918da15f095b"
-dependencies = [
- "anyhow",
- "ark-bn254",
- "ark-ec",
- "ark-ff",
- "ark-serialize",
- "bcs 0.1.6",
- "blake2b_simd",
- "byteorder",
- "group 0.13.0",
- "halo2 1.0.0 (git+https://github.com/zkmove/halo2-verifier.move?rev=b0a4234701ceb9029e7cdb43066b918da15f095b)",
- "halo2_backend",
- "halo2_frontend",
- "halo2_middleware",
- "halo2_proofs",
- "halo2curves",
- "hex",
- "hex-literal",
- "rand 0.8.6",
- "vk-gen-examples 1.0.0 (git+https://github.com/zkmove/halo2-verifier.move?rev=b0a4234701ceb9029e7cdb43066b918da15f095b)",
+ "vk-gen-examples",
 ]
 
 [[package]]
@@ -11223,7 +11148,7 @@ dependencies = [
  "fastcrypto",
  "fastcrypto-vdf",
  "fastcrypto-zkp",
- "halo2-verifier 1.0.0 (git+https://github.com/zkmove/halo2-verifier.move?rev=b0a4234701ceb9029e7cdb43066b918da15f095b)",
+ "halo2-verifier",
  "indexmap 2.14.0",
  "move-binary-format 0.0.3 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
  "move-core-types 0.0.4 (git+https://github.com/zkmove/sui.git?rev=76269b3f6ff1ea56ddfcf258be8c19ffe21ce105)",
@@ -11422,6 +11347,7 @@ dependencies = [
 name = "sui-ptb-helper"
 version = "1.0.0"
 dependencies = [
+ "allocative",
  "anyhow",
  "serde",
  "serde_json",
@@ -11673,27 +11599,13 @@ version = "1.0.0"
 dependencies = [
  "anyhow",
  "blake2b_simd",
- "halo2-verifier 1.0.0",
+ "halo2-verifier",
  "halo2_backend",
  "halo2_proofs",
  "hex",
  "serde",
  "serde_json",
  "sui-ptb-helper",
-]
-
-[[package]]
-name = "sui-verifier-api"
-version = "1.0.0"
-source = "git+https://github.com/zkmove/halo2-verifier.move?branch=main#b30e002e39c16ae2ffb438b98a9b95b48f3ef8cd"
-dependencies = [
- "anyhow",
- "halo2-verifier 1.0.0 (git+https://github.com/zkmove/halo2-verifier.move?branch=main)",
- "halo2_backend",
- "halo2_proofs",
- "hex",
- "serde",
- "serde_json",
 ]
 
 [[package]]
@@ -13315,38 +13227,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "vk-gen-examples"
-version = "1.0.0"
-source = "git+https://github.com/zkmove/halo2-verifier.move?branch=main#b30e002e39c16ae2ffb438b98a9b95b48f3ef8cd"
-dependencies = [
- "anyhow",
- "halo2 1.0.0 (git+https://github.com/zkmove/halo2-verifier.move?branch=main)",
- "halo2_backend",
- "halo2_proofs",
- "hex",
- "rand 0.8.6",
- "rand_core 0.6.4",
- "serde",
- "serde_json",
-]
-
-[[package]]
-name = "vk-gen-examples"
-version = "1.0.0"
-source = "git+https://github.com/zkmove/halo2-verifier.move?rev=b0a4234701ceb9029e7cdb43066b918da15f095b#b0a4234701ceb9029e7cdb43066b918da15f095b"
-dependencies = [
- "anyhow",
- "halo2 1.0.0 (git+https://github.com/zkmove/halo2-verifier.move?rev=b0a4234701ceb9029e7cdb43066b918da15f095b)",
- "halo2_backend",
- "halo2_proofs",
- "hex",
- "rand 0.8.6",
- "rand_core 0.6.4",
- "serde",
- "serde_json",
-]
-
-[[package]]
 name = "vm-circuit"
 version = "0.4.0"
 dependencies = [
@@ -14509,7 +14389,7 @@ dependencies = [
  "clap",
  "env_logger",
  "halo2 0.4.0",
- "halo2-verifier 1.0.0 (git+https://github.com/zkmove/halo2-verifier.move?branch=main)",
+ "halo2-verifier",
  "halo2_proofs",
  "hex",
  "log",
@@ -14525,7 +14405,7 @@ dependencies = [
  "rand 0.8.6",
  "serde",
  "serde_json",
- "sui-verifier-api 1.0.0 (git+https://github.com/zkmove/halo2-verifier.move?branch=main)",
+ "sui-verifier-api",
  "toml 0.8.23",
  "vm-circuit",
  "witness",
@@ -14536,11 +14416,12 @@ name = "zkmove-mint-gui"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "halo2-verifier",
  "move-core-types 0.0.4 (git+https://github.com/zkmove/move?rev=f98f7d6)",
  "serde",
  "serde_json",
  "sui-ptb-helper",
- "sui-verifier-api 1.0.0",
+ "sui-verifier-api",
  "tauri",
  "tauri-build",
  "zkmove-cli",
