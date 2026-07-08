@@ -1,6 +1,6 @@
-# zkMove Confidential Mint MVP
+# Rust API Example
 
-这个仓库是 `zkMove Confidential Mint` 的 MVP 应用。它包含一个 Tauri GUI backend、一个最小 Sui Move package `mint-min`，以及用于 localnet 验收的 single PTB harness。
+我们用一个示例来演示zkmove rust API 如何使用。示例包含一个 Tauri GUI backend、一个最小 Sui Move package `mint-min`，以及用于 localnet 验收的 single PTB harness。
 
 MVP 验证的核心语义是：
 
@@ -13,9 +13,19 @@ MVP 验证的核心语义是：
 
 > 重要：仓库里的 `mint-min.manifest.json` 只能当作样例。localnet 重启、重新 publish、重新 register、重新上传 params/vk 后，`store`、`appPackage`、`verifierApiPackage`、`paramsObjectId`、`vkObjectId` 都可能失效。`unable to fetch object ...` 基本就是 manifest 里的 object id 指向了旧 localnet。
 
-## 0. 终端约定
+## 一、应用开发者操作
 
 下面所有命令默认在同一个 shell 里连续执行。不要跳过 `export`，后续步骤会复用这些变量。
+
+我们把 localnet 操作分成两个角色：
+
+- 应用开发者：发布 `verifier_api`、上传 verifier artifacts、发布 `mint-min`，并运行 localnet PTB harness 做验收。
+- 终端用户：创建自己的 `mint_min::Store`，并用 GUI 发起 mint。
+
+本 run 会创建两个 Sui 地址：
+
+- `APP_DEV_SENDER`：应用开发者地址。
+- `END_USER_SENDER`：终端用户地址。
 
 默认假设几个 repo 放在同一个父目录下；如果你的目录不同，只需要改这里：
 
@@ -83,7 +93,7 @@ cd "$ZKMOVE_VM_REPO"
 cargo check -p zkmove-cli
 ```
 
-## 1. 启动 fresh localnet 并创建账户
+### 1. 启动 fresh localnet 并创建两个角色账户
 
 这一步会在 `$APP_REPO/.localnet/<run-id>` 下创建本次 run 私有的 Sui client config 和 keystore，不会要求你去全局目录里找 `sui.keystore`。
 
@@ -121,7 +131,7 @@ until curl -sS \
 done
 ```
 
-创建本次 run 的 localnet 环境、账户、gas：
+创建本次 run 的 localnet 环境、应用开发者账户、终端用户账户，并分别领取 gas：
 
 ```bash
 "$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" -y new-env \
@@ -130,30 +140,39 @@ done
 
 "$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" switch --env localnet
 
-export SUI_SENDER="$("$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" --json -q new-address ed25519 mint-min-user | jq -r '.address')"
-"$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" switch --address "$SUI_SENDER"
+export APP_DEV_SENDER="$("$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" --json -q new-address ed25519 app-developer | jq -r '.address')"
+export END_USER_SENDER="$("$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" --json -q new-address ed25519 mint-min-user | jq -r '.address')"
 
-until "$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" faucet \
-  --address "$SUI_SENDER" \
-  --url "$SUI_FAUCET_URL"; do
-  sleep 1
+for address in "$APP_DEV_SENDER" "$END_USER_SENDER"; do
+  until "$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" faucet \
+    --address "$address" \
+    --url "$SUI_FAUCET_URL"; do
+    sleep 1
+  done
+  "$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" balance "$address"
 done
 
-"$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" balance "$SUI_SENDER"
-```
-
-给 GUI backend 和 harness 使用的两个值就在这里：
-
-```bash
 export SUI_KEYSTORE_PATH="$(sed -n 's/^  File: //p' "$SUI_CLIENT_CONFIG" | head -1)"
-export SUI_SENDER="$("$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" active-address | tail -n 1 | tr -d '[:space:]')"
 
+use_app_developer_account() {
+  "$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" switch --address "$APP_DEV_SENDER" >/dev/null
+  echo "active address = $APP_DEV_SENDER (app developer)"
+}
+
+use_end_user_account() {
+  "$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" switch --address "$END_USER_SENDER" >/dev/null
+  echo "active address = $END_USER_SENDER (end user)"
+}
+
+echo "APP_DEV_SENDER=$APP_DEV_SENDER"
+echo "END_USER_SENDER=$END_USER_SENDER"
 echo "SUI_KEYSTORE_PATH=$SUI_KEYSTORE_PATH"
-echo "SUI_SENDER=$SUI_SENDER"
 test -f "$SUI_KEYSTORE_PATH" && echo "OK keystore" || echo "MISSING keystore"
+
+use_app_developer_account
 ```
 
-## 2. 准备 GUI setup 输入
+### 2. 准备 GUI setup 输入
 
 下面用默认验收值：
 
@@ -171,11 +190,13 @@ cd "$OFFCHAIN_PACKAGE"
 
 从这里开始，不再用 `zkmove vm dry-run/setup/prove/verify` 生成本次 run 的 setup artifacts；GUI backend 会直接调用 Rust API 完成 witness、setup、proof/local verify。
 
-## 3. 发布 verifier API，并用 GUI 上传 params/vk
+### 3. 发布 verifier API，并用 GUI 上传 params/vk
 
 如果你是在同一个 `$RUN_DIR` 里重跑第 3 步，先换一组新的 step-local pubfile；不要手工编辑 `Pub.localnet.toml`：
 
 ```bash
+use_app_developer_account
+
 export SETUP_ATTEMPT_ID="$(date +%Y%m%d-%H%M%S)"
 export SUI_PUBFILE="$RUN_DIR/Pub.$SETUP_ATTEMPT_ID.localnet.toml"
 ```
@@ -203,7 +224,7 @@ echo "VERIFIER_API_PACKAGE=$VERIFIER_API_PACKAGE"
 test -n "$VERIFIER_API_PACKAGE"
 ```
 
-创建一个本次 run 的 manifest。这里 `appPackage`、`store`、`paramsObjectId`、`vkObjectId` 先留空；GUI setup 会写回 `paramsObjectId`、`vkObjectId` 和 `circuit.k`，第 5 步会补上 `appPackage` 和 `store`：
+创建一个本次 run 的 manifest。这里 `appPackage`、`store`、`paramsObjectId`、`vkObjectId` 先留空；GUI setup 会写回 `paramsObjectId`、`vkObjectId` 和 `circuit.k`。应用开发者部分先把 `sui.sender` 固定为 `APP_DEV_SENDER`，所以 GUI setup 和后面的 harness 都由应用开发者账户签名：
 
 ```bash
 export ZKMOVE_MINT_MANIFEST="$RUN_DIR/mint-min.manifest.json"
@@ -222,7 +243,7 @@ cat >"$ZKMOVE_MINT_MANIFEST" <<EOF
   "sui": {
     "rpcUrl": "$SUI_RPC_URL",
     "keystorePath": "$SUI_KEYSTORE_PATH",
-    "sender": "$SUI_SENDER"
+    "sender": "$APP_DEV_SENDER"
   },
   "circuit": {
     "packagePath": "$OFFCHAIN_PACKAGE",
@@ -247,7 +268,6 @@ cd "$APP_REPO/backend"
 ZKMOVE_MINT_MANIFEST="$ZKMOVE_MINT_MANIFEST" \
 SUI_RPC_URL="$SUI_RPC_URL" \
 SUI_KEYSTORE_PATH="$SUI_KEYSTORE_PATH" \
-SUI_SENDER="$SUI_SENDER" \
 cargo run --bin zkmove-mint-gui
 ```
 
@@ -266,11 +286,13 @@ test -n "$VK_OBJECT_ID" && test "$VK_OBJECT_ID" != "null"
 test -n "$K_VALUE" && test "$K_VALUE" != "null"
 ```
 
-## 4. 发布 `mint-min` 并创建 Store
+### 4. 发布 `mint-min` 并创建应用开发者验收 Store
 
-构建并发布 `mint-min`：
+应用开发者构建并发布 `mint-min`：
 
 ```bash
+use_app_developer_account
+
 cd "$APP_REPO/mint-min"
 "$SUI_BIN" move build --build-env testnet --silence-warnings
 
@@ -294,54 +316,57 @@ echo "APP_PACKAGE=$APP_PACKAGE"
 test -n "$APP_PACKAGE"
 ```
 
-创建本次 run 的 `mint_min::Store`。这一步就是 `manifest.store` 的来源：
+应用开发者创建一个只用于 localnet PTB harness 的 `mint_min::Store`。这个 Store 是验收用，不是终端用户的业务 Store：
 
 ```bash
+use_app_developer_account
+
 "$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" --json -q call \
   --package "$APP_PACKAGE" \
   --module mint_min \
   --function register \
   --gas-budget 1000000000 \
-  >"$RUN_DIR/register.json"
+  >"$RUN_DIR/app-dev-register.json"
 
-export STORE_OBJECT_ID="$(jq -r '
+export APP_DEV_STORE_OBJECT_ID="$(jq -r '
   first(
     .objectChanges[]?
     | select(.type == "created")
     | select((.objectType // "") | endswith("::mint_min::Store"))
     | .objectId
   ) // empty
-' "$RUN_DIR/register.json")"
+' "$RUN_DIR/app-dev-register.json")"
 
-echo "STORE_OBJECT_ID=$STORE_OBJECT_ID"
-test -n "$STORE_OBJECT_ID"
+echo "APP_DEV_STORE_OBJECT_ID=$APP_DEV_STORE_OBJECT_ID"
+test -n "$APP_DEV_STORE_OBJECT_ID"
 ```
 
 如果后面看到 `unable to fetch object <store-id>`，先用这个命令确认：
 
 ```bash
-"$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" object "$STORE_OBJECT_ID" --json | jq '.objectId // .data.objectId'
+"$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" object "$APP_DEV_STORE_OBJECT_ID" --json | jq '.objectId // .data.objectId'
 ```
 
-如果这里查不到，说明 `STORE_OBJECT_ID` 已经不是当前 localnet 上的 object，需要重新执行本节的 `register`，并重写 manifest。
+如果这里查不到，说明 `APP_DEV_STORE_OBJECT_ID` 已经不是当前 localnet 上的 object，需要重新执行本节的 `register`，并重写 manifest。
 
-## 5. 补全本次 run 的 manifest
+### 5. 补全应用开发者验收 manifest
 
-第 3 步已经创建并写回了 `$ZKMOVE_MINT_MANIFEST`。这里只补上第 4 步得到的 `APP_PACKAGE` 和 `STORE_OBJECT_ID`：
+第 3 步已经创建并写回了 `$ZKMOVE_MINT_MANIFEST`。这里只补上第 4 步得到的 `APP_PACKAGE`、`APP_DEV_STORE_OBJECT_ID` 和应用开发者 signer：
 
 ```bash
 tmp_manifest="$ZKMOVE_MINT_MANIFEST.tmp"
 jq \
   --arg app "$APP_PACKAGE" \
-  --arg store "$STORE_OBJECT_ID" \
-  '.appPackage = $app | .store = $store' \
+  --arg store "$APP_DEV_STORE_OBJECT_ID" \
+  --arg sender "$APP_DEV_SENDER" \
+  '.appPackage = $app | .store = $store | .sui.sender = $sender' \
   "$ZKMOVE_MINT_MANIFEST" >"$tmp_manifest"
 mv "$tmp_manifest" "$ZKMOVE_MINT_MANIFEST"
 
 jq . "$ZKMOVE_MINT_MANIFEST"
 ```
 
-提交前先做一次类型一致性检查。这里要全部输出 `OK`；如果 `params` 或 `vk` 显示的 package 不是当前 `VERIFIER_API_PACKAGE`，第 6 步会在链上报 `TypeMismatch`：
+进入 harness 或 GUI mint 前，先做一次类型一致性检查。这里要全部输出 `OK`；如果 `params` 或 `vk` 显示的 package 不是当前 `VERIFIER_API_PACKAGE`，第 6 步会在链上报 `TypeMismatch`：
 
 ```bash
 sui_object_type_package() {
@@ -363,10 +388,10 @@ sui_object_type_package() {
 export PARAMS_TYPE_PACKAGE="$(sui_object_type_package "$PARAMS_OBJECT_ID")"
 export VK_TYPE_PACKAGE="$(sui_object_type_package "$VK_OBJECT_ID")"
 
-export STORE_TYPE_PACKAGE="$(jq -r --arg id "$STORE_OBJECT_ID" '
+export APP_DEV_STORE_TYPE_PACKAGE="$(jq -r --arg id "$APP_DEV_STORE_OBJECT_ID" '
   first(.objectChanges[]? | select(.type == "created" and .objectId == $id) | .objectType)
   | split("::")[0]
-' "$RUN_DIR/register.json")"
+' "$RUN_DIR/app-dev-register.json")"
 
 test "$PARAMS_TYPE_PACKAGE" = "$VERIFIER_API_PACKAGE" && echo "OK params type" || {
   echo "BAD params type: $PARAMS_TYPE_PACKAGE != $VERIFIER_API_PACKAGE"
@@ -378,8 +403,8 @@ test "$VK_TYPE_PACKAGE" = "$VERIFIER_API_PACKAGE" && echo "OK vk type" || {
   exit 1
 }
 
-test "$STORE_TYPE_PACKAGE" = "$APP_PACKAGE" && echo "OK store type" || {
-  echo "BAD store type: $STORE_TYPE_PACKAGE != $APP_PACKAGE"
+test "$APP_DEV_STORE_TYPE_PACKAGE" = "$APP_PACKAGE" && echo "OK app dev store type" || {
+  echo "BAD app dev store type: $APP_DEV_STORE_TYPE_PACKAGE != $APP_PACKAGE"
   exit 1
 }
 ```
@@ -388,6 +413,8 @@ test "$STORE_TYPE_PACKAGE" = "$APP_PACKAGE" && echo "OK store type" || {
 
 ```bash
 cat >"$RUN_DIR/summary.env" <<EOF
+export APP_REPO="$APP_REPO"
+export SUI_BIN="$SUI_BIN"
 export RUN_DIR="$RUN_DIR"
 export LOCALNET_PID="$LOCALNET_PID"
 export SETUP_ATTEMPT_ID="$SETUP_ATTEMPT_ID"
@@ -395,25 +422,38 @@ export SUI_RPC_URL="$SUI_RPC_URL"
 export SUI_CLIENT_CONFIG="$SUI_CLIENT_CONFIG"
 export SUI_PUBFILE="$SUI_PUBFILE"
 export SUI_KEYSTORE_PATH="$SUI_KEYSTORE_PATH"
-export SUI_SENDER="$SUI_SENDER"
+export APP_DEV_SENDER="$APP_DEV_SENDER"
+export END_USER_SENDER="$END_USER_SENDER"
 export VERIFIER_API_PACKAGE="$VERIFIER_API_PACKAGE"
 export PARAMS_OBJECT_ID="$PARAMS_OBJECT_ID"
 export VK_OBJECT_ID="$VK_OBJECT_ID"
 export APP_PACKAGE="$APP_PACKAGE"
-export STORE_OBJECT_ID="$STORE_OBJECT_ID"
+export APP_DEV_STORE_OBJECT_ID="$APP_DEV_STORE_OBJECT_ID"
 export ZKMOVE_MINT_MANIFEST="$ZKMOVE_MINT_MANIFEST"
 export VALUE="$VALUE"
 export NONCE="$NONCE"
+
+use_app_developer_account() {
+  "\$SUI_BIN" client --client.config "\$SUI_CLIENT_CONFIG" switch --address "\$APP_DEV_SENDER" >/dev/null
+  echo "active address = \$APP_DEV_SENDER (app developer)"
+}
+
+use_end_user_account() {
+  "\$SUI_BIN" client --client.config "\$SUI_CLIENT_CONFIG" switch --address "\$END_USER_SENDER" >/dev/null
+  echo "active address = \$END_USER_SENDER (end user)"
+}
 EOF
 
 source "$RUN_DIR/summary.env"
 ```
 
-## 6. 运行 localnet PTB harness
+### 6. 运行 localnet PTB harness
 
-PTB 主验收使用 harness，不使用旧的 `upload_sui_proof.sh` 多交易路径：
+PTB 主验收使用 harness，不使用旧的 `upload_sui_proof.sh` 多交易路径。这个步骤属于应用开发者/QA 验收，不是普通终端用户日常操作。它使用 `APP_DEV_SENDER` 和 `APP_DEV_STORE_OBJECT_ID`：
 
 ```bash
+use_app_developer_account
+
 cd "$APP_REPO"
 ZKMOVE_MINT_MANIFEST="$ZKMOVE_MINT_MANIFEST" \
   ./mint-min/run-localnet-ptb-harness.sh --value "$VALUE" --nonce "$NONCE" --negative
@@ -433,25 +473,7 @@ negative balanceUnchanged=true
 - negative case 复用同一 proof，但传入 `encrypted_amount + 1`，链上 abort。
 - abort 后 balance 不变。
 
-## 7. 运行 GUI
-
-同一个 shell 里保留 `ZKMOVE_MINT_MANIFEST`、`SUI_KEYSTORE_PATH`、`SUI_SENDER` 后启动 GUI；如果你不是从同一个 shell 启动，就在 GUI 的 `manifestPath` 输入框里粘贴 `$ZKMOVE_MINT_MANIFEST`：
-
-```bash
-cd "$APP_REPO/backend"
-cargo run --bin zkmove-mint-gui
-```
-
-在窗口中输入 `amount` 和 `nonce` 后点击 `Mint`。本地会生成 witness/proof，先本地 verify，再用 single PTB 提交链上 mint。
-
-成功结果应包含：
-
-```text
-tx mode = single_ptb
-tx <digest> -> success
-```
-
-## 8. 验收检查
+### 7. 应用开发者验收检查
 
 推荐按下面顺序检查：
 
@@ -465,9 +487,9 @@ cargo check -p zkmove-cli
 
 cd "$APP_REPO"
 cargo check --manifest-path backend/Cargo.toml
-ZKMOVE_MINT_MANIFEST="$ZKMOVE_MINT_MANIFEST" \
-  ./mint-min/run-localnet-ptb-harness.sh --value "$VALUE" --nonce "$NONCE" --negative
 ```
+
+第 6 步的 harness 会修改验收 Store 的 balance；同一个 `APP_DEV_STORE_OBJECT_ID` 不要重复跑 harness。需要重跑时，先重新创建一个应用开发者验收 Store，写回 manifest，再执行第 6 步。
 
 最终验收标准：
 
@@ -478,11 +500,95 @@ ZKMOVE_MINT_MANIFEST="$ZKMOVE_MINT_MANIFEST" \
 5. positive mint 输出 `txMode=single_ptb`，且 `Store.balance == encrypted_amount`。
 6. negative mint 输出 `txMode=single_ptb status=aborted`，且 balance 不变。
 
-## 9. 常见问题
+## 二、终端用户操作
 
-`sui` 不存在，或第 0 步输出 `MISSING executable $SUI_BIN`：
+终端用户从应用开发者拿到当前 localnet 的 `$RUN_DIR/summary.env` 和 `$ZKMOVE_MINT_MANIFEST` 后，先恢复环境：
 
-- 默认路径假设 Sui repo 在 `$WORK_ROOT/zkmove_sui`，如果你的目录不同，先修正第 0 步里的 `SUI_REPO`。
+```bash
+source "$RUN_DIR/summary.env"
+```
+
+### 1. 创建终端用户 Store 并写回 manifest
+
+终端用户创建自己的 `mint_min::Store`。这一步会把 manifest 的 `store` 和 `sui.sender` 从应用开发者验收值切换到终端用户值：
+
+```bash
+use_end_user_account
+
+"$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" --json -q call \
+  --package "$APP_PACKAGE" \
+  --module mint_min \
+  --function register \
+  --gas-budget 1000000000 \
+  >"$RUN_DIR/end-user-register.json"
+
+export END_USER_STORE_OBJECT_ID="$(jq -r '
+  first(
+    .objectChanges[]?
+    | select(.type == "created")
+    | select((.objectType // "") | endswith("::mint_min::Store"))
+    | .objectId
+  ) // empty
+' "$RUN_DIR/end-user-register.json")"
+
+echo "END_USER_STORE_OBJECT_ID=$END_USER_STORE_OBJECT_ID"
+test -n "$END_USER_STORE_OBJECT_ID"
+
+tmp_manifest="$ZKMOVE_MINT_MANIFEST.tmp"
+jq \
+  --arg store "$END_USER_STORE_OBJECT_ID" \
+  --arg sender "$END_USER_SENDER" \
+  '.store = $store | .sui.sender = $sender' \
+  "$ZKMOVE_MINT_MANIFEST" >"$tmp_manifest"
+mv "$tmp_manifest" "$ZKMOVE_MINT_MANIFEST"
+
+cat >>"$RUN_DIR/summary.env" <<EOF
+export END_USER_STORE_OBJECT_ID="$END_USER_STORE_OBJECT_ID"
+EOF
+```
+
+终端用户 mint 前，也做一次 Store 类型检查：
+
+```bash
+export END_USER_STORE_TYPE_PACKAGE="$(jq -r --arg id "$END_USER_STORE_OBJECT_ID" '
+  first(.objectChanges[]? | select(.type == "created" and .objectId == $id) | .objectType)
+  | split("::")[0]
+' "$RUN_DIR/end-user-register.json")"
+
+test "$END_USER_STORE_TYPE_PACKAGE" = "$APP_PACKAGE" && echo "OK end user store type" || {
+  echo "BAD end user store type: $END_USER_STORE_TYPE_PACKAGE != $APP_PACKAGE"
+  exit 1
+}
+```
+
+### 2. 运行 GUI
+
+同一个 shell 里保留 `ZKMOVE_MINT_MANIFEST` 和 `SUI_KEYSTORE_PATH` 后启动 GUI；如果你不是从同一个 shell 启动，就先 `source "$RUN_DIR/summary.env"`，或者在 GUI 的 `manifestPath` 输入框里粘贴 `$ZKMOVE_MINT_MANIFEST`：
+
+```bash
+use_end_user_account
+
+cd "$APP_REPO/backend"
+ZKMOVE_MINT_MANIFEST="$ZKMOVE_MINT_MANIFEST" \
+SUI_RPC_URL="$SUI_RPC_URL" \
+SUI_KEYSTORE_PATH="$SUI_KEYSTORE_PATH" \
+cargo run --bin zkmove-mint-gui
+```
+
+在窗口中输入 `amount` 和 `nonce` 后点击 `Mint`。本地会生成 witness/proof，先本地 verify，再用 single PTB 提交链上 mint。
+
+成功结果应包含：
+
+```text
+tx mode = single_ptb
+tx <digest> -> success
+```
+
+## 常见问题
+
+`sui` 不存在，或应用开发者操作开头输出 `MISSING executable $SUI_BIN`：
+
+- 默认路径假设 Sui repo 在 `$WORK_ROOT/zkmove_sui`，如果你的目录不同，先修正应用开发者操作开头的 `SUI_REPO`。
 - 确认目录正确后构建 `sui` binary：
 
 ```bash
@@ -490,7 +596,7 @@ cd "$SUI_REPO"
 cargo build --bin sui
 ```
 
-- 构建成功后回到第 0 步，重新执行 `check_exec "$SUI_BIN"`，应该输出 `OK executable ...`。
+- 构建成功后回到应用开发者操作开头，重新执行 `check_exec "$SUI_BIN"`，应该输出 `OK executable ...`。
 
 `error: unable to fetch object 0x...`
 
@@ -552,8 +658,21 @@ GUI setup 报 `failed to upload verifier artifacts with verifierApiPackage ...`�
 交易签名或 gas 报错：
 
 - 确认 `SUI_KEYSTORE_PATH` 来自 `$SUI_CLIENT_CONFIG` 的 `keystore.File`。
-- 确认 `SUI_SENDER` 是 `"$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" active-address` 输出的地址。
-- 确认 `"$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" balance "$SUI_SENDER"` 有 gas。
+- 终端里的 `sui client` 命令使用 active address：应用开发者操作前运行 `use_app_developer_account`，终端用户操作前运行 `use_end_user_account`。
+- GUI backend 和 harness 使用 manifest 里的 `sui.sender`：应用开发者验收前应是 `APP_DEV_SENDER`，终端用户 GUI mint 前应是 `END_USER_SENDER`。
+- 确认 `APP_DEV_SENDER` 和 `END_USER_SENDER` 都在同一个 `$SUI_KEYSTORE_PATH` 里，并且都有 gas：
+
+```bash
+"$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" balance "$APP_DEV_SENDER"
+"$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" balance "$END_USER_SENDER"
+```
+
+- 如果 `"$SUI_BIN" client --client.config "$SUI_CLIENT_CONFIG" active-address` 和当前步骤角色不一致，重新执行对应的 `use_*_account` helper。
+- 如果 GUI 或 harness 用错账户，检查 manifest：
+
+```bash
+jq -r '.sui.sender, .store' "$ZKMOVE_MINT_MANIFEST"
+```
 
 链上 proof verification 失败：
 
@@ -575,7 +694,6 @@ kill "$LOCALNET_PID"
 
 ## Known Limitations
 
-- strong binding 依赖 `zkmove-vm` 的 public-input row mapping 修复；当前本地验证分支是 `feat/mvp`，至少需要包含 `75c0c87 Fix public input instance row mapping for non-zero argument indices (#361)`。该修复未合入 main 前，不能声称“任意同事拉 main 即可复现强绑定验收”。
 - Tauri backend 依赖 `zkmove-vm/cli/src/api/setup.rs` 和 `mod.rs` 中的 `setup_with_witness` public export 改动；当前本地验证分支是 `feat/mvp`，至少需要包含 `32f9be4 Expose setup API for mint MVP`。这些改动必须提交或固定分支。
 - empty public inputs 只能作为 smoke path，不能作为最终 MVP 验收。
-- package publish/register 仍是终端 setup；GUI 目前只覆盖 witness/setup/proof、本地 verify、`params/vk/circuit_info` upload 和 manifest writeback。
+- `verifier_api` / `mint-min` publish 仍是应用开发者终端 setup；终端用户的 `Store` register 目前也在 README 里用终端命令完成。GUI 目前只覆盖 witness/setup/proof、本地 verify、`params/vk/circuit_info` upload、manifest writeback 和 mint。
